@@ -5,17 +5,18 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import SpreadSheet from './Components/SpreadSheet';
+import DocSelector from './Components/DocSelector';
 
 function App() {
 
 
-  const [documentName, setDocumentName] = useState(getDocumentNameFromWindow());
-  //const memoryUsage = process.memoryUsage();
-  useEffect(() => {
-    if (window.location.href) {
-      setDocumentName(getDocumentNameFromWindow());
-    }
-  }, [getDocumentNameFromWindow]);
+  const [documentName, setDocumentName] = useState('');
+  // const memoryUsage = process.memoryUsage();
+  // useEffect(() => {
+  //   if (window.location.href) {
+  //     setDocumentName(getDocumentNameFromWindow());
+  //   }
+  // }, [getDocumentNameFromWindow]);
 
 
 
@@ -23,51 +24,56 @@ function App() {
   // we will use the window location to get the document name
   // this is not the best way to do this, but it is simple
   // and it works for the purposes of this demo
-  function getDocumentNameFromWindow() {
-    const href = window.location.href;
+  // function getDocumentNameFromWindow() {
+  //   const href = window.location.href;
 
-    // remove  the protocol 
-    const protoEnd = href.indexOf('//');
-    // find the beginning of the path
-    const pathStart = href.indexOf('/', protoEnd + 2);
+  //   // remove  the protocol 
+  //   const protoEnd = href.indexOf('//');
+  //   // find the beginning of the path
+  //   const pathStart = href.indexOf('/', protoEnd + 2);
 
-    if (pathStart < 0) {
-      // there is no path
-      return '';
-    }
-    // get the first part of the path
-    const docEnd = href.indexOf('/', pathStart + 1);
-    if (docEnd < 0) {
-      // there is no other slash
-      return href.substring(pathStart + 1);
-    }
-    // there is a slash
-    return href.substring(pathStart + 1, docEnd);
+  //   if (pathStart < 0) {
+  //     // there is no path
+  //     return '';
+  //   }
+  //   // get the first part of the path
+  //   const docEnd = href.indexOf('/', pathStart + 1);
+  //   if (docEnd < 0) {
+  //     // there is no other slash
+  //     return href.substring(pathStart + 1);
+  //   }
+  //   // there is a slash
+  //   return href.substring(pathStart + 1, docEnd);
 
-  }
+  // }
 
-  //callback function to reset the current URL to have the document name
-  function resetURL(documentName: string) {
-    // get the current URL
-    const currentURL = window.location.href;
-    // remove anything after the last slash
-    const index = currentURL.lastIndexOf('/');
-    const newURL = currentURL.substring(0, index + 1) + documentName;
-    // set the URL
-    window.history.pushState({}, '', newURL);
-    // now reload the page
-    window.location.reload();
-  }
+  // //callback function to reset the current URL to have the document name
+  // function resetURL(documentName: string) {
+  //   // get the current URL
+  //   const currentURL = window.location.href;
+  //   // remove anything after the last slash
+  //   const index = currentURL.lastIndexOf('/');
+  //   const newURL = currentURL.substring(0, index + 1) + documentName;
+  //   // set the URL
+  //   window.history.pushState({}, '', newURL);
+  //   // now reload the page
+  //   window.location.reload();
+  // }
 
-  if (documentName === '') {
-    setDocumentName('test');
-    resetURL('test');
-  }
+  // if (documentName === '') {
+  //   setDocumentName('test');
+  //   resetURL('test');
+  // }
+
 
   return (
     <div className="App">
       <header className="App-header">
-        <SpreadSheet documentName={documentName} />
+        {
+          documentName === '' ?
+          <DocSelector onDocumentSelect={setDocumentName}/>
+          : <SpreadSheet documentName={documentName} onDocumentSelect={setDocumentName}/>
+        }
       </header>
 
     </div>
