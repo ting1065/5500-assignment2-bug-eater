@@ -1,0 +1,17 @@
+.doc-select-button {
+  background-color: #1267bc;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  font-size: large;
+  width: 10%;
+  margin: 1%;
+}
+
+.doc-select-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0 auto;
+  width: 100%;
+}
