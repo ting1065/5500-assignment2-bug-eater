@@ -11,6 +11,7 @@ import ServerSelector from "./ServerSelector";
 
 interface SpreadSheetProps {
   documentName: string;
+  onDocumentSelect: (documentName: string) => void;
 }
 
 /**
@@ -22,7 +23,7 @@ interface SpreadSheetProps {
 // create the client that talks to the backend.
 const spreadSheetClient = new SpreadSheetClient('test', 'juancho');
 
-function SpreadSheet({ documentName }: SpreadSheetProps) {
+function SpreadSheet({ documentName, onDocumentSelect }: SpreadSheetProps) {
   const [formulaString, setFormulaString] = useState(spreadSheetClient.getFormulaString())
   const [resultString, setResultString] = useState(spreadSheetClient.getResultString())
   const [cells, setCells] = useState(spreadSheetClient.getSheetDisplayStringsForGUI());
@@ -187,6 +188,7 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
 
   return (
     <div>
+      <button onClick={()=>{onDocumentSelect('')}}>select another document</button>
       <Formula formulaString={formulaString} resultString={resultString}  ></Formula>
       <Status statusString={statusString}></Status>
       {<SheetHolder cellsValues={cells}
