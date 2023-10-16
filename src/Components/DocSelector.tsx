@@ -32,6 +32,7 @@ function DocSelector({ onDocumentSelect }: DocSelectorProps) {
           );
         })}
       </div>
+      <h4>reminder: documents will not refresh if user name is empty</h4>
     </div>
   );
 }
