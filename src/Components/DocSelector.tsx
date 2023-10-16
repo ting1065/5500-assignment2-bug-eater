@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PortsGlobal, LOCAL_SERVER_URL } from "../ServerDataDefinitions";
+import "./DocSelector.css";
 
 interface DocSelectorProps {
   onDocumentSelect: (documentName: string) => void;
@@ -22,10 +23,10 @@ function DocSelector({ onDocumentSelect }: DocSelectorProps) {
   return (
     <div>
       <h1>Select a document</h1>
-      <div>
+      <div className="doc-select-button-container">
         {docs.map((doc: string) => {
           return (
-            <button key={doc} onClick={() => onDocumentSelect(doc)}>
+            <button className="doc-select-button" key={doc} onClick={() => onDocumentSelect(doc)}>
               {doc}
             </button>
           );
