@@ -24,10 +24,15 @@ export interface CellTransport {
   formula: string[];
   value: number;
   error: string;
+  editing: string;
 }
-
+export interface UserEditing {
+  userName: string;
+  cellLabel: string;
+}
 export interface CellTransportMap {
   [key: string]: CellTransport;
+  
 }
 export interface DocumentTransport {
   columns: number;
@@ -37,5 +42,6 @@ export interface DocumentTransport {
   result: string;
   currentCell: string;
   isEditing: boolean;
+  contributingUsers: UserEditing[];
 }
 

@@ -1,4 +1,5 @@
 .cell {
+    position: relative;
     border: 1px solid black;
     width: 100px;
     height: 30px;
@@ -17,6 +18,7 @@
 }
 
 .cell-selected {
+    position: relative;
     border: 1px solid rgb(223, 11, 11);
     width: 100px;
     height: 30px;
@@ -35,6 +37,7 @@
 }
 
 .cell-editing {
+    position: relative;
     border: 1px solid rgb(223, 11, 11);
     width: 100px;
     height: 30px;
@@ -50,4 +53,14 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+.cell-editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2px;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-size: 10px;
+    color: black;
+    z-index: 1;
 }
