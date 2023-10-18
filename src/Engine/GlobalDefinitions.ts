@@ -8,7 +8,7 @@ export const ErrorMessages = {
   invalidOperator: "#ERR",
   missingParentheses: "#ERR",
   emptyFormula: "#EMPTY!", // this is not an error message but we use it to indicate that the cell is empty
-
+  sqrtByNegative: "#NEGUNDER√", // new error type for sqrt negative number
 }
 
 export const ButtonNames = {

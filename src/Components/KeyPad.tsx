@@ -185,6 +185,23 @@ function KeyPad({ onButtonClick, onCommandButtonClick, currentlyEditing }: KeyPa
           className={(getDoneButtonClass())}
           dataTestId="edit-toggle-button"
         />
+      <div className="buttons-row"></div>
+        <Button
+          text="√"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="sqrt-button"
+        />
+        <Button
+          text="∛"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="cbrt-button"
+         />
+
+
       </div>
 
     </div>
