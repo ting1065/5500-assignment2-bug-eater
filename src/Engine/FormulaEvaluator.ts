@@ -127,9 +127,32 @@ export class FormulaEvaluator {
    *  
    */
   private term(): number {
+    console.log("start term operation",this._currentFormula.length > 0, this._currentFormula[0]==="√");
     let result = this.factor();
-    while (this._currentFormula.length > 0 && (this._currentFormula[0] === "*" || this._currentFormula[0] === "/")) {
+    while (this._currentFormula.length > 0 && (this._currentFormula[0]==="√"||this._currentFormula[0]==="∛"||this._currentFormula[0]==="*"||this._currentFormula[0]==="∛")) {
       let operator = this._currentFormula.shift();
+      console.log("his._currentFormula.shift();",operator)
+      // if this two, we can call directly
+      if (operator === "√" || operator === "∛") {
+        // sqrt operation
+        if (operator === "√") {
+          // only positive number can perform √ 
+          if (result >= 0) {
+            result = Math.sqrt(result);
+          } else {
+            this._errorOccured = true;
+            this._errorMessage = ErrorMessages.sqrtByNegative;
+            this._lastResult = Infinity;
+            return Infinity;
+          }
+        // cbrt operation
+        } else if (operator === "∛") {
+          result = Math.cbrt(result);
+        }
+        // we don't need factor, so we can directly jump to next
+        continue;
+      }
+
       let factor = this.factor();
       if (operator === "*") {
         result *= factor;
@@ -156,6 +179,7 @@ export class FormulaEvaluator {
    * 
    */
   private factor(): number {
+    
     let result = 0;
     // if the formula is empty set errorOccured to true 
     // and set the errorMessage to "PARTIAL"
@@ -194,6 +218,8 @@ export class FormulaEvaluator {
         this._lastResult = result;
       }
 
+
+      
       // otherwise set the errorOccured flag to true  
     } else {
       this._errorOccured = true;
