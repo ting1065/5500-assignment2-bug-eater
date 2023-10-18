@@ -3,6 +3,7 @@ import React from "react";
 import Cell from "../Engine/Cell";
 
 import "./SheetComponent.css";
+import { get } from "http";
 
 // a component that will render a two dimensional array of cells
 // the cells will be rendered in a table
@@ -43,7 +44,14 @@ function SheetComponent({ cellsValues, onClick, currentCell, currentlyEditing }:
     }
     return "cell";
   }
-
+  function getCellValues(cell: string) {
+    //split on | to return the first part
+    return cell.split("|")[0];
+  }
+  function getCellEditor(cell: string) {
+    //split on | to return the second part
+    return cell.split("|")[1];
+  }
   return (
     <table className="table">
       <tbody>
@@ -68,7 +76,8 @@ function SheetComponent({ cellsValues, onClick, currentCell, currentlyEditing }:
                   data-testid={Cell.columnRowToCell(colIndex, rowIndex)}
                   className={(getCellClass(Cell.columnRowToCell(colIndex, rowIndex)))}
                 >
-                  {cell}
+                  {getCellValues(cell)}
+                  <label className="cell-editor">{getCellEditor(cell)}</label>
                 </button>
 
               </td>

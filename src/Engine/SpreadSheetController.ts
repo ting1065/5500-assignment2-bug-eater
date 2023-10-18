@@ -300,6 +300,13 @@ export class SpreadSheetController {
     return displayString;
   }
 
+  /**
+ * Get the cells that are currently being edited and by whom.
+ * @returns A map of cell labels and the corresponding user editing them.
+ */
+  getCellsBeingEdited(): Map<string, string> {
+    return new Map(this._cellsBeingEdited);
+  }
 
   /**
    * get the current cell label
@@ -314,7 +321,7 @@ export class SpreadSheetController {
 
   }
 
-
+  
   /**
    * 
    * @param user 
@@ -328,6 +335,18 @@ export class SpreadSheetController {
     if (!this._contributingUsers.has(user)) {
       this.requestViewAccess(user, 'A1');
     }
+    container.contributingUsers = [];
+    this._contributingUsers.forEach((value: ContributingUser, key: string) => {
+      let user = {
+        userName: key,
+        cellLabel: value.cellLabel,
+        isEditing: value.isEditing
+        }
+        if(value.isEditing){
+          container.contributingUsers.push(user);
+          }
+          
+      });
     let userData = this._contributingUsers.get(user)!;
     let cellFocused = userData.cellLabel;
     container.currentCell = cellFocused;

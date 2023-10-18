@@ -8,7 +8,7 @@
  * getDocument(name: string, user: string): Promise<Document>
  */
 
-import { DocumentTransport, CellTransport, CellTransportMap, ErrorMessages } from '../Engine/GlobalDefinitions';
+import { DocumentTransport, CellTransport, CellTransportMap, ErrorMessages, UserEditing } from '../Engine/GlobalDefinitions';
 import { Cell } from '../Engine/Cell';
 
 import { PortsGlobal, LOCAL_SERVER_URL, RENDER_SERVER_URL } from '../ServerDataDefinitions';
@@ -52,6 +52,7 @@ class SpreadSheetClient {
             currentCell: 'A1',
             isEditing: false,
             cells: new Map<string, CellTransport>(),
+            contributingUsers: [],
         };
         for (let row = 0; row < document.rows; row++) {
             for (let column = 0; column < document.columns; column++) {
@@ -60,6 +61,7 @@ class SpreadSheetClient {
                     formula: [],
                     value: 0,
                     error: ErrorMessages.emptyFormula,
+                    editing: '',
                 };
                 document.cells.set(cellName, cell);
             }
@@ -145,6 +147,17 @@ class SpreadSheetClient {
             return cellTransport.error;
         }
     }
+    private _getEditorString(contributingUsers: UserEditing[], cellLabel: string): string {
+        for(let user of contributingUsers) {
+           //console.log("user:", user.userName);
+            //console.log("cellLabel:", cellLabel);
+            if(user.cellLabel === cellLabel) {
+                //console.log("user:", user.userName);
+                return user.userName;
+            }
+        }
+        return '';
+    }
     public getSheetDisplayStringsForGUI(): string[][] {
         if (!this._document) {
             return [];
@@ -163,7 +176,7 @@ class SpreadSheetClient {
                 const cellName = Cell.columnRowToCell(column, row)!;
                 const cell = cells.get(cellName) as CellTransport;
                 if (cell) {
-                    sheetDisplayStrings[row][column] = this._getCellValue(cell);
+                    sheetDisplayStrings[row][column] = this._getCellValue(cell) + "|" + cell.editing;
                 } else {
                     sheetDisplayStrings[row][column] = 'xxx';
                 }
@@ -368,21 +381,21 @@ class SpreadSheetClient {
         const isEditing = document.isEditing;
 
 
-
         // create the document
         this._document = {
             formula: formula,
             result: result,
-
+            contributingUsers: new Array<UserEditing>(),
+            cells: new Map<string, CellTransport>(),
             currentCell: currentCell,
             columns: columns,
             rows: rows,
             isEditing: isEditing,
-            cells: new Map<string, CellTransport>(),
         };
         // create the cells
         const cells = document.cells as unknown as CellTransportMap;
-
+        const contributingUsers = document.contributingUsers as unknown as UserEditing[];
+        console.log("contributingUsers: ", contributingUsers);
         for (let cellName in cells) {
 
             let cellTransport = cells[cellName];
@@ -391,7 +404,9 @@ class SpreadSheetClient {
                 formula: cellTransport.formula,
                 value: cellTransport.value,
                 error: cellTransport.error,
+                editing: this._getEditorString(contributingUsers, cellName),
             };
+            console.log("editor: ", cell.editing);
             this._document!.cells.set(cellName, cell);
         }
 
