@@ -188,7 +188,8 @@ function SpreadSheet({ documentName, onDocumentSelect }: SpreadSheetProps) {
 
   return (
     <div>
-      <button onClick={()=>{onDocumentSelect('')}}>select another document</button>
+      <p style={{marginBlockEnd: 0}}>Current Document: {documentName}</p>
+      <button style={{marginBlockEnd: 20}} onClick={()=>{onDocumentSelect('')}}>select another document</button>
       <Formula formulaString={formulaString} resultString={resultString}  ></Formula>
       <Status statusString={statusString}></Status>
       {<SheetHolder cellsValues={cells}
