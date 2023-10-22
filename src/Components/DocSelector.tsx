@@ -7,7 +7,8 @@ interface DocSelectorProps {
 }
 
 function DocSelector({ onDocumentSelect }: DocSelectorProps) {
-  const [docs, setDocs] = useState([]);
+  const [docs, setDocs] = useState<string[]>([]);
+  const [newDocName, setNewDocName] = useState<string>("");
 
   const serverPort = PortsGlobal.serverPort;
   const url = `${LOCAL_SERVER_URL}:${serverPort}/documents`;
@@ -20,8 +21,23 @@ function DocSelector({ onDocumentSelect }: DocSelectorProps) {
     })();
   }, [url]);
 
+  function onCreateHandler(input: string) {
+    if (input === "") {
+      alert("document name cannot be empty");
+      return;
+    }
+    if (docs.includes(input)) {
+      alert("document already exists");
+      return;
+    }
+    onDocumentSelect(input);
+  }
+
   return (
     <div>
+      <h1>Create a new document</h1>
+      <input placeholder="enter a new doc name" type="text" value={newDocName} onChange={(e)=>{setNewDocName(e.target.value)}}/>
+      <button onClick={()=>{onCreateHandler(newDocName)}}>Create</button>
       <h1>Select a document</h1>
       <div className="doc-select-button-container">
         {docs.map((doc: string) => {
