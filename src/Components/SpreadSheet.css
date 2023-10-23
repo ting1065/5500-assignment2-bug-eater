@@ -1,0 +1,114 @@
+/* Basic styling reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Main container */
+div {
+    background-color: #2a2f38; /* Dark grey background for better contrast */
+    padding: 30px;
+    color: #FFFFFF; /* White text for contrast */
+}
+
+/* Gradient for various elements */
+.gradient-bg {
+    background: linear-gradient(45deg, #FFAA00, #FF4500);
+    color: white;
+}
+
+/* Formula and Status styling */
+Formula, Status {
+    display: block;
+    margin-bottom: 25px;
+    background-color: #3a3f48; /* Slightly lighter grey */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    font-size: 22px; /* Increased size */
+    text-align: center;
+}
+
+/* Button styling */
+button {
+    padding: 20px 30px; /* Increased for larger buttons */
+    margin: 5px; /* Reduced margin for closer buttons */
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #FF6347; /* Tomato */
+    font-size: 24px; /* Bigger font size */
+    color: #FFFFFF; /* White text for contrast */
+    position: relative;
+    overflow: hidden;
+}
+
+button.gradient {
+    background-color: transparent;
+    background-image: none;
+}
+
+button.gradient:before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: 1;
+    background: linear-gradient(45deg, #FFAA00, #FF4500, #FFAA00, #FF4500);
+    transform: rotate(45deg);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* User Login styling */
+input[type="text"] {
+    padding: 18px; /* Adjusted for bigger text */
+    margin: 10px 0;
+    border: 3px solid #FF6347;
+    border-radius: 25px;
+    width: 100%;
+    font-size: 24px; /* Bigger font size */
+    transition: border 0.3s;
+    color: #2a2f38; /* Dark text for contrast on light background */
+    background-color: #FFFFFF; /* White background for contrast */
+}
+
+input[type="text"]:focus {
+    border-color: #FFAA00; /* Brighter color on focus */
+}
+
+
+/* Server selector styling */
+ServerSelector {
+    margin-top: 25px;
+}
+
+/* Keypad styling */
+KeyPad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 25px;
+}
+
+/* Sheet holder styling */
+SheetHolder {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+

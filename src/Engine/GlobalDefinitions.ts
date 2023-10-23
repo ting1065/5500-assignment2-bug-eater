@@ -9,6 +9,10 @@ export const ErrorMessages = {
   missingParentheses: "#ERR",
   emptyFormula: "#EMPTY!", // this is not an error message but we use it to indicate that the cell is empty
   sqrtByNegative: "#NEGUNDER√", // new error type for sqrt negative number
+  tan90: "#ERR",
+  negativeRoot: "#ERR",
+  asin:"#ERR",
+
 }
 
 export const ButtonNames = {

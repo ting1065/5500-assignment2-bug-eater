@@ -200,10 +200,88 @@ function KeyPad({ onButtonClick, onCommandButtonClick, currentlyEditing }: KeyPa
           className="button-operator"
           dataTestId="cbrt-button"
          />
+        <Button
+          text="x²"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="square-button"
+         />
+         <Button
+          text="x³"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="cube-button"
+         />
+         <Button
+          text="1/x"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="oneOver-button"
+         />
+          <Button
+          text="sin"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="sin-button"
+         />
+         <Button
+          text="cos"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="cos-button"
+         />
+         <Button
+          text="tan"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="tan-button"
+         />
+         <Button
+          text="asin"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="asin-button"
+         />
+         <Button
+          text="acos"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="acos-button"
+         />
+         <Button
+          text="atan"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="atan-button"
+         />
+         <Button
+          text="+/-"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="negative-button"
+         />
+         <Button
+          text="rand"
+          isDigit={false}
+          onClick={onButtonClick}
+          className="button-operator"
+          dataTestId="rand-button"
+         />
+
 
 
       </div>
-
+s
     </div>
   );
 } // KeyPad

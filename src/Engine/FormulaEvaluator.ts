@@ -129,9 +129,75 @@ export class FormulaEvaluator {
   private term(): number {
     console.log("start term operation",this._currentFormula.length > 0, this._currentFormula[0]==="√");
     let result = this.factor();
-    while (this._currentFormula.length > 0 && (this._currentFormula[0]==="√"||this._currentFormula[0]==="∛"||this._currentFormula[0]==="*"||this._currentFormula[0]==="∛")) {
+   
+    while (this._currentFormula.length >0 && (this._currentFormula[0]==="√"||this._currentFormula[0]==="∛"||this._currentFormula[0]==="*"||this._currentFormula[0]==="x²"
+    ||this._currentFormula[0]==="x³"||this._currentFormula[0]==="1/x"||this._currentFormula[0]==="sin"||this._currentFormula[0]==="cos"||this._currentFormula[0]==="tan"
+    ||this._currentFormula[0]==="asin"||this._currentFormula[0]==="acos"||this._currentFormula[0]==="atan"||this._currentFormula[0]==="+/-"||this._currentFormula[0]==="rand" )) {
       let operator = this._currentFormula.shift();
-      console.log("his._currentFormula.shift();",operator)
+      if(operator==="x²"){
+        result = Math.pow(result, 2);
+        continue;
+      }else if (operator === "x³") {
+        result = Math.pow(result, 3);
+        continue;
+      }else if (operator === "1/x") {
+        if (result === 0) {
+          this._errorOccured = true;
+          this._errorMessage = ErrorMessages.divideByZero;
+          this._lastResult = Infinity;
+          return Infinity;
+        } else {
+          result = 1 / result;
+          continue;
+        }
+      }else if (operator === "sin") {
+        result = Math.sin(result);
+        continue;
+      } else if (operator === "cos") {
+        result = Math.cos(result);
+        continue;
+      }else if (operator === "tan") {
+        if (result === Math.PI / 2) {
+          this._errorOccured = true;
+          this._errorMessage = ErrorMessages.tan90;
+          this._lastResult = NaN;
+          return NaN;
+        } else if (result === Math.PI * 3 / 2) {
+          this._errorOccured = true;
+          this._errorMessage = ErrorMessages.tan90;
+          this._lastResult = NaN;
+          return NaN;
+        }
+        result = Math.tan(result);
+        continue;
+      }else if (operator === "asin") {
+        if(result>1 || result <-1){
+          this._errorOccured = true;
+          this._errorMessage = ErrorMessages.asin;
+          this._lastResult = NaN;
+          return NaN;
+        }
+        result = Math.asin(result);
+        continue;
+      } else if (operator === "acos") {
+        if(result>1 || result <-1){
+          this._errorOccured = true;
+          this._errorMessage = ErrorMessages.asin;
+          this._lastResult = NaN;
+          return NaN;
+        }
+        result = Math.acos(result);
+        continue;
+      } else if (operator === "atan") {
+        result = Math.atan(result);
+        continue;
+      }else if (operator === "+/-") {
+        result = result * -1;
+        continue;
+      }else if (operator === "rand") {
+        result = Math.random(); 
+        continue;
+      }
       // if this two, we can call directly
       if (operator === "√" || operator === "∛") {
         // sqrt operation
@@ -168,6 +234,9 @@ export class FormulaEvaluator {
         result /= factor;
       }
     }
+
+  
+
     // set the lastResult to the result
     this._lastResult = result;
     return result;
@@ -192,6 +261,7 @@ export class FormulaEvaluator {
 
     // get the first token in the formula
     let token = this._currentFormula.shift();
+
 
     // if the token is a number set the result to the number
     // and set the lastResult to the number
