@@ -221,6 +221,7 @@ function KeyPad({ onButtonClick, onCommandButtonClick, currentlyEditing }: KeyPa
           className="button-operator"
           dataTestId="oneOver-button"
          />
+         <div className="buttons-row"></div>
           <Button
           text="sin"
           isDigit={false}
@@ -256,6 +257,7 @@ function KeyPad({ onButtonClick, onCommandButtonClick, currentlyEditing }: KeyPa
           className="button-operator"
           dataTestId="acos-button"
          />
+         <div className="buttons-row"></div>
          <Button
           text="atan"
           isDigit={false}
