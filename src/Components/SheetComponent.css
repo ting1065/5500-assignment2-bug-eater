@@ -17,12 +17,52 @@
 }
 
 .cell-selected {
+    position: relative;
+    border: 1px solid rgb(223, 11, 11);
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     border-color: #df0b0b;
     background-color: #f8e58d; /* Softened the color */
 }
 
 .cell-editing {
+    position: relative;
+    border: 1px solid rgb(223, 11, 11);
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: yellow;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     border-color: #df0b0b;
     background-color: #0066cc; /* Changed blue to a more standard shade */
     color: #f0e460; /* Changed yellow to a softer shade */
+}
+.cell-editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2px;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-size: 10px;
+    color: black;
+    z-index: 1;
 }
