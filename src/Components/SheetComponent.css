@@ -1,4 +1,5 @@
-.cell, .cell-selected, .cell-editing {
+.cell {
+    position: relative;
     border: 1px solid black;
     width: 100px;
     height: 30px;
@@ -26,14 +27,13 @@
     font-size: 20px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #908a17;
     color: black;
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    border-color: #df0b0b;
-    background-color: #f8e58d; /* Softened the color */
 }
 
 .cell-editing {
@@ -46,15 +46,13 @@
     font-size: 20px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: blue;
     color: yellow;
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    border-color: #df0b0b;
-    background-color: #0066cc; /* Changed blue to a more standard shade */
-    color: #f0e460; /* Changed yellow to a softer shade */
 }
 .cell-editor {
     position: absolute;
